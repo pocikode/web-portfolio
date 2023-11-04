@@ -18,4 +18,5 @@ Route::name('api.')->group(function () {
     Route::get('profile', [ApiController::class, 'profile'])->name('profile');
     Route::get('resume', [ApiController::class, 'resume'])->name('resume');
     Route::get('skill', [ApiController::class, 'skill'])->name('skill');
+    Route::post('contact', [ApiController::class, 'contact'])->name('contact');
 });

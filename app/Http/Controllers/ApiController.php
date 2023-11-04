@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Inbox;
 use App\Models\Resume;
 use App\Models\Skill;
 use App\Models\SocialMedia;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {
@@ -51,5 +53,13 @@ class ApiController extends Controller
         $skills = Skill::all();
 
         return response()->json($skills);
+    }
+
+    public function contact(Request $request)
+    {
+        // TODO: validation
+        Inbox::create($request->only('name', 'email', 'subject', 'message'));
+
+        return response()->json(['message' => 'Success']);
     }
 }
