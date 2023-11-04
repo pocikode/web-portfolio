@@ -59,5 +59,33 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.store('profile', {
+                name: 'John Doe',
+                email: 'info@mail.com',
+                photo: '{{ asset('img/dummy-profile.png') }}',
+                phone: '08123123123',
+                city: 'New York',
+                about: 'about',
+                social_media: [],
+
+                init() {
+                    axios.get('{{ route('api.profile') }}')
+                        .then(resp => {
+                            this.name = resp.data.name
+                            this.email = resp.data.email
+                            this.photo = resp.data.photo
+                            this.phone = resp.data.phone
+                            this.city = resp.data.city
+                            this.about = resp.data.about
+                            this.social_media = resp.data.social_media
+                        })
+                }
+            })
+        })
+    </script>
+    @stack('scripts')
 </body>
 </html>

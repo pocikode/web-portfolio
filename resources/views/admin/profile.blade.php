@@ -1,14 +1,17 @@
 @extends('admin.layout.base')
 
 @section('content')
-    <div class="flex justify-center flex-wrap -mx-3">
-        <div class="flex-none w-full md:w-5/6 max-w-full px-3">
+    <div class="flex flex-wrap -mx-3">
+        <div class="flex-none w-full md:w-1/2 max-w-full px-3">
             <div class="relative flex flex-col min-w-0 mt-6 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
+                <div class="p-6 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
+                    <h6>Profile</h6>
+                </div>
                 <div class="flex-auto px-0 py-5">
-                    <form class="flex flex-wrap p-0 overflow-x-auto" method="post" enctype="multipart/form-data">
+                    <form class="flex flex-wrap p-0 overflow-x-auto" method="post" action="{{ route('admin.home') }}" enctype="multipart/form-data">
                         @csrf
                         <!-- Photo Section -->
-                        <div class="w-full max-w-full px-3 mb-6 sm:w-full sm:flex-none xl:mb-0 xl:w-1/3">
+                        <div class="w-full max-w-full px-3 mb-6 sm:w-full sm:flex-none xl:mb-0">
                             <div class="flex flex-col items-center space-x-6">
                                 <div class="shrink-0">
                                     <img id='preview_img' class="h-32 w-32 object-cover rounded-full" src="{{ $user->photo ? asset('storage/' . $user->photo) : asset('img/dummy-profile.png') }}" alt="{{ $user->name }}" />
@@ -26,7 +29,7 @@
                             </div>
                         </div>
                         <!-- Profile Section -->
-                        <div class="flex flex-wrap w-full max-w-full px-3 mb-6 sm:w-full xl:mb-0 xl:w-2/3">
+                        <div class="flex flex-wrap w-full max-w-full px-3 my-6 sm:w-full xl:mb-0">
                             <div class="mb-6 px-3 w-full md:w-1/2">
                                 <label class="block mb-1 md:mb-0" for="inline-name">Name</label>
                                 <input type="text" placeholder="Your Name" class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none"
@@ -54,6 +57,45 @@
                             <div class="mb-6 px-3 w-full">
                                 <button type="submit" class="inline-block px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all rounded-lg cursor-pointer bg-gradient-to-tl from-purple-700 to-pink-500 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 hover:scale-102 active:opacity-85 hover:shadow-soft-xs">Save</button>
                             </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="flex-none w-full md:w-1/2 max-w-full px-3">
+            <div class="relative flex flex-col min-w-0 mt-6 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
+                <div class="p-6 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
+                    <h6>Social Media</h6>
+                </div>
+                <div class="flex-auto">
+                    <form class="flex flex-wrap p-6 overflow-x-auto" method="post" action="{{ route('admin.socmed') }}">
+                        @csrf
+                        <div class="flex items-center mb-6 w-full">
+                            <i class='bx bxl-linkedin-square bx-lg'></i>
+                            <label class="w-full ml-3">
+                                <input type="text" name="linkedin" placeholder="https://google.com" value="{{ $social_media['linkedin'] ?? '' }}" class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none" />
+                            </label>
+                        </div>
+                        <div class="flex items-center mb-6 w-full">
+                            <i class='bx bxl-github bx-lg'></i>
+                            <label class="w-full ml-3">
+                                <input type="text" name="github" placeholder="https://google.com" value="{{ $social_media['github'] ?? '' }}" class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none" />
+                            </label>
+                        </div>
+                        <div class="flex items-center mb-6 w-full">
+                            <i class='bx bxl-twitter bx-lg'></i>
+                            <label class="w-full ml-3">
+                                <input type="text" name="twitter" placeholder="https://google.com" value="{{ $social_media['twitter'] ?? '' }}" class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none" />
+                            </label>
+                        </div>
+                        <div class="flex items-center mb-6 w-full">
+                            <i class='bx bxl-instagram bx-lg'></i>
+                            <label class="w-full ml-3">
+                                <input type="text" name="instagram" placeholder="https://google.com" value="{{ $social_media['instagram'] ?? '' }}" class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none" />
+                            </label>
+                        </div>
+                        <div class="mb-6 w-full">
+                            <button type="submit" class="inline-block px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all rounded-lg cursor-pointer bg-gradient-to-tl from-purple-700 to-pink-500 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 hover:scale-102 active:opacity-85 hover:shadow-soft-xs">Save</button>
                         </div>
                     </form>
                 </div>

@@ -29,5 +29,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::get('/', [Admin\ProfileController::class, 'index'])->name('home');
         Route::post('/', [Admin\ProfileController::class, 'save']);
+        Route::post('/social-media', [Admin\ProfileController::class, 'socmed'])->name('socmed');
     });
 });

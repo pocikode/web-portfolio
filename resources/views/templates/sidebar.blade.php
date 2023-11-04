@@ -2,14 +2,14 @@
 <header id="header">
     <div class="d-flex flex-column">
 
-        <div class="profile">
-            <img src="{{ asset('img/dummy-profile.png') }}" alt="" class="img-fluid rounded-circle">
-            <h1 class="text-light"><a href="{{ route('home') }}">Agus Supriyatna</a></h1>
+        <div class="profile" x-data>
+            <img x-bind:src="$store.profile.photo" alt="" class="img-fluid rounded-circle">
+            <h1 class="text-light"><a href="{{ route('home') }}" x-text="$store.profile.name"></a></h1>
             <div class="social-links mt-3 text-center">
-                <a href="#" target="_blank" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-                <a href="#" target="_blank" class="github"><i class="bx bxl-github"></i></a>
-                <a href="#" target="_blank" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" target="_blank" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a x-bind:href="$store.profile.social_media.linkedin" target="_blank" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                <a x-bind:href="$store.profile.social_media.github" target="_blank" class="github"><i class="bx bxl-github"></i></a>
+                <a x-bind:href="$store.profile.social_media.twitter" target="_blank" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a x-bind:href="$store.profile.social_media.instagram" target="_blank" class="instagram"><i class="bx bxl-instagram"></i></a>
             </div>
         </div>
 
