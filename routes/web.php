@@ -22,11 +22,12 @@ Route::view('/contact', 'contact')->name('contact');
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('guest')->group(function () {
-        Route::get('/login', [Admin\LoginController::class, 'index'])->name('login');
-        Route::post('/login', [Admin\LoginController::class, 'authenticate']);
+        Route::get('/login', [Admin\AuthController::class, 'login'])->name('login');
+        Route::post('/login', [Admin\AuthController::class, 'authenticate']);
     });
 
     Route::middleware('auth')->group(function () {
+        Route::get('/logout', [Admin\AuthController::class, 'logout'])->name('logout');
         Route::get('/', [Admin\ProfileController::class, 'index'])->name('home');
         Route::post('/', [Admin\ProfileController::class, 'save']);
         Route::post('/social-media', [Admin\ProfileController::class, 'socmed'])->name('socmed');

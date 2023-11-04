@@ -49,7 +49,7 @@
             </li>
 
             <li class="mt-0.5 w-full">
-                <a class="sidenav-menu ease-nav-brand" href="#">
+                <a class="sidenav-menu ease-nav-brand" href="{{ route('admin.logout') }}">
                     <div class="icon">
                         <i class='bx bx-log-out'></i>
                     </div>
