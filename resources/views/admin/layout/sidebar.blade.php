@@ -21,7 +21,7 @@
                 </a>
             </li>
             <li class="mt-0.5 w-full">
-                <a class="sidenav-menu ease-nav-brand" href="#">
+                <a class="sidenav-menu ease-nav-brand {{ request()->routeIs('admin.resume') ? 'active' : '' }}" href="{{ route('admin.resume') }}">
                     <div class="icon">
                         <i class="bx bxs-file"></i>
                     </div>
@@ -29,7 +29,7 @@
                 </a>
             </li>
             <li class="mt-0.5 w-full">
-                <a class="sidenav-menu ease-nav-brand" href="#">
+                <a class="sidenav-menu ease-nav-brand {{ request()->routeIs('admin.inbox*') ? 'active' : '' }}" href="{{ route('admin.inbox') }}">
                     <div class="icon">
                         <i class="bx bxs-envelope"></i>
                     </div>

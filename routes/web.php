@@ -31,5 +31,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/', [Admin\ProfileController::class, 'save']);
         Route::post('/social-media', [Admin\ProfileController::class, 'socmed'])->name('socmed');
         Route::post('/skills', [Admin\ProfileController::class, 'skills'])->name('skills');
+        Route::get('/resume', [Admin\ResumeController::class, 'index'])->name('resume');
+        Route::get('/inbox', [Admin\InboxController::class, 'index'])->name('inbox');
+        Route::get('/inbox/{id}', [Admin\InboxController::class, 'show'])->name('inbox.show');
     });
 });

@@ -4,6 +4,7 @@ const plugin = require("tailwindcss/plugin");
 export default {
   content: [
       "./resources/views/admin/**/*.blade.php",
+      './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
   ],
     presets: [],
     darkMode: "class",

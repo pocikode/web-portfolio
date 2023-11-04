@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Inbox;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,5 +24,7 @@ class DatabaseSeeder extends Seeder
              'about' => 'Lipsum',
              'city' => 'Jakarta Barat',
          ]);
+
+         Inbox::factory()->count(35)->create();
     }
 }
