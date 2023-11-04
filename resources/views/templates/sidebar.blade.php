@@ -4,7 +4,7 @@
 
         <div class="profile">
             <img src="{{ asset('img/dummy-profile.png') }}" alt="" class="img-fluid rounded-circle">
-            <h1 class="text-light"><a href="{{ route('home') }}">John Doe</a></h1>
+            <h1 class="text-light"><a href="{{ route('home') }}">Agus Supriyatna</a></h1>
             <div class="social-links mt-3 text-center">
                 <a href="#" target="_blank" class="linkedin"><i class="bx bxl-linkedin"></i></a>
                 <a href="#" target="_blank" class="github"><i class="bx bxl-github"></i></a>
