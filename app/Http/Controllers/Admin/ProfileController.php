@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Skill;
 use App\Models\SocialMedia;
 use Illuminate\Http\Request;
 
@@ -14,11 +15,13 @@ class ProfileController extends Controller
 
         $social_media = [];
         $socmed_data = SocialMedia::all();
+        $skills = Skill::all();
+
         foreach ($socmed_data as $socmed) {
             $social_media[$socmed['name']] = $socmed['link'];
         }
 
-        return view('admin.profile', compact('user', 'social_media'));
+        return view('admin.profile', compact('user', 'social_media', 'skills'));
     }
 
     public function save(Request $request)
@@ -52,6 +55,28 @@ class ProfileController extends Controller
                 ['name' => $name, 'link' => $link]
             );
         }
+
+        return redirect()->route('admin.home');
+    }
+
+    public function skills(Request $request)
+    {
+        // TODO: validation
+        $names = $request->post('name');
+        $values = $request->post('value');
+
+        Skill::truncate();
+
+        if (!$names) {
+            return redirect()->route('admin.home');
+        }
+
+        $data = [];
+        foreach ($names as $idx => $name) {
+            $data[] = ['name' => $name, 'value' => $values[$idx]];
+        }
+
+        Skill::insert($data);
 
         return redirect()->route('admin.home');
     }

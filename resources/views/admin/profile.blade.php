@@ -68,7 +68,7 @@
                     <h6>Social Media</h6>
                 </div>
                 <div class="flex-auto">
-                    <form class="flex flex-wrap p-6 overflow-x-auto" method="post" action="{{ route('admin.socmed') }}">
+                    <form class="flex flex-wrap p-3 overflow-x-auto" method="post" action="{{ route('admin.socmed') }}">
                         @csrf
                         <div class="flex items-center mb-6 w-full">
                             <i class='bx bxl-linkedin-square bx-lg'></i>
@@ -100,6 +100,46 @@
                     </form>
                 </div>
             </div>
+
+            <div class="relative flex flex-col min-w-0 mt-6 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
+                <div class="p-6 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
+                    <h6>Skills</h6>
+                </div>
+                <div class="flex-auto">
+                    <form class="flex flex-wrap p-3 overflow-x-auto" method="post" action="{{ route('admin.skills') }}" x-data="skills">
+                        @csrf
+                        <ul id="input-skill-list" x-ref="inputSkillList" class="w-full mb-3">
+                            <template x-for="(skill, index) in skills">
+                                <li class="w-full flex flex-wrap items-center mb-3">
+                                    <div class="w-7/12 flex items-center">
+                                        {{--                                        <div class="shadow-soft-2xl flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-gray bg-center stroke-0 text-center xl:p-2.5">--}}
+                                        <div class="">
+                                            <i class='bx bx-move'></i>
+                                        </div>
+                                        <label class="w-full ml-3">
+                                            <input type="text" name="name[]" placeholder="Python" x-bind:value="skill.name" class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none" required/>
+                                        </label>
+                                    </div>
+                                    <div class="w-5/12 flex items-center">
+                                        <label class="w-full ml-3">
+                                            <input type="number" min="0" max="100" name="value[]" placeholder="70" x-bind:value="skill.value" class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none" required/>
+                                        </label>
+                                        <button type="button" @click="removeSkill(index)" class="shadow-soft-2xl flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-red bg-center stroke-0 ml-3 text-center xl:p-2.5">
+                                            <i class='bx bx-trash text-white'></i>
+                                        </button>
+                                    </div>
+                                </li>
+                            </template>
+                        </ul>
+                        <div class="w-full flex flex-row-reverse">
+                            <a href="#" type="button" @click.prevent="addSkill()" class="mr-12">+ Add Skill</a>
+                        </div>
+                        <div class="mb-6 w-full">
+                            <button type="submit" class="inline-block px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all rounded-lg cursor-pointer bg-gradient-to-tl from-purple-700 to-pink-500 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 hover:scale-102 active:opacity-85 hover:shadow-soft-xs">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
@@ -118,5 +158,34 @@
                 URL.revokeObjectURL(output.src) // free memory
             }
         };
+
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('skills', () => ({
+                skills: @json($skills),
+                addSkill() {
+                    this.skills.push({
+                        name: null,
+                        value: null
+                    });
+                },
+                removeSkill(index) {
+                    this.skills.splice(index, 1);
+                }
+            }))
+        })
+
+        new Sortable(document.getElementById('input-skill-list'), {
+            // onEnd: function (/**Event*/evt) {
+            //     const item = evt.item;
+            //     const newIndex = Array.from(item.parentNode.children).indexOf(item);
+            //     const inputList = document.querySelector('[x-ref="inputSkillList"]');
+            //     const currentOrder = inputList.__x.getUnobservedData().inputs;
+            //
+            //     // Rearrange the inputs array in Alpine.js data
+            //     const movedItem = currentOrder.splice(evt.oldIndex, 1)[0];
+            //     currentOrder.splice(newIndex, 0, movedItem);
+            //     inputList.__x.setUnobservedData({ inputs: currentOrder });
+            // }
+        });
     </script>
 @endpush
