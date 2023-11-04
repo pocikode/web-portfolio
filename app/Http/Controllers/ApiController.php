@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Resume;
+use App\Models\Skill;
 use App\Models\SocialMedia;
 use App\Models\User;
 
@@ -43,5 +44,12 @@ class ApiController extends Controller
         }
 
         return response()->json($data);
+    }
+
+    public function skill()
+    {
+        $skills = Skill::all();
+
+        return response()->json($skills);
     }
 }
