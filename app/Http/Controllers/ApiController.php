@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Resume;
 use App\Models\SocialMedia;
 use App\Models\User;
 
@@ -23,5 +24,24 @@ class ApiController extends Controller
         }
 
         return response()->json($profile);
+    }
+
+    public function resume()
+    {
+        $data = [
+            'school' => [],
+            'work' => [],
+        ];
+
+        $resumes = Resume::all();
+        foreach ($resumes as $resume) {
+            if ($resume->type === 'school') {
+                $data['school'][] = $resume;
+            } else {
+                $data['work'][] = $resume;
+            }
+        }
+
+        return response()->json($data);
     }
 }
